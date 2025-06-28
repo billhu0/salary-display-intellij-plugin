@@ -1,7 +1,7 @@
 package us.billhu.salaryplugin
 
-import com.intellij.ui.components.JBTextField;
-import com.intellij.util.ui.FormBuilder;
+import com.intellij.ui.components.JBTextField
+import com.intellij.util.ui.FormBuilder
 
 import javax.swing.*
 

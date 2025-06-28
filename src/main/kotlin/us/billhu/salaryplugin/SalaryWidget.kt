@@ -1,17 +1,17 @@
 package us.billhu.salaryplugin
 
-import java.awt.event.MouseEvent
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.wm.CustomStatusBarWidget
 import com.intellij.openapi.wm.StatusBar
 import com.intellij.openapi.wm.StatusBarWidget
 import com.intellij.openapi.wm.StatusBarWidget.TextPresentation
+import com.intellij.util.Consumer
+import java.awt.event.MouseEvent
 import java.time.Duration
 import java.time.LocalDateTime
+import java.time.LocalTime
 import javax.swing.JComponent
 import javax.swing.JLabel
-import com.intellij.util.Consumer
-import java.time.LocalTime
 import javax.swing.Timer
 
 class SalaryWidget(private val project: Project) : CustomStatusBarWidget, TextPresentation {
@@ -26,15 +26,14 @@ class SalaryWidget(private val project: Project) : CustomStatusBarWidget, TextPr
         updateValue2()
     }
 
-    private var settings: SalarySettings.State
+    private val settings: SalarySettings.State = SalarySettings.getInstance().state
 
     init {
+        myTimer.initialDelay = 10000
         myTimer.start()
-        settings = SalarySettings.getInstance().state
     }
 
     private fun updateValue2() {
-        settings = SalarySettings.getInstance().state
 
         // Check weekday
         val now = LocalDateTime.now()
@@ -62,7 +61,6 @@ class SalaryWidget(private val project: Project) : CustomStatusBarWidget, TextPr
         if (now.isAfter(endTimeToday)) label.text += " 已下班"
         statusBar!!.updateWidget(ID())
     }
-
 
     override fun ID(): String = "salary-widget"
     override fun getPresentation(): StatusBarWidget.WidgetPresentation = this

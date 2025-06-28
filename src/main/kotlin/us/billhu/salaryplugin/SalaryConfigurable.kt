@@ -1,14 +1,13 @@
 package us.billhu.salaryplugin
 
-import java.time.format.DateTimeFormatter
-import java.time.format.DateTimeParseException
 import com.intellij.openapi.options.Configurable
+import com.intellij.openapi.options.ConfigurationException
 import org.jetbrains.annotations.Nls
 import javax.swing.*
 import java.util.Objects
-
 import java.time.LocalTime
-import com.intellij.openapi.options.ConfigurationException
+import java.time.format.DateTimeFormatter
+import java.time.format.DateTimeParseException
 
 class SalaryConfigurable : Configurable {
     private var mySettingsComponent: SalarySettingsComponent? = null
@@ -40,7 +39,7 @@ class SalaryConfigurable : Configurable {
         try {
             LocalTime.parse(input, DateTimeFormatter.ofPattern("HH:mm"))
             true
-        } catch (e: DateTimeParseException) {
+        } catch (_: DateTimeParseException) {
             false
         }
 
