@@ -1,0 +1,40 @@
+<!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
+<idea-plugin>
+    <!-- Unique identifier of the plugin. It should be FQN. It cannot be changed between the plugin versions. -->
+    <id>us.billhu.salaryplugin</id>
+
+    <!-- Public plugin name should be written in Title Case.
+         Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-name -->
+    <name>Salary Display</name>
+
+    <!-- A displayed Vendor name or Organization ID displayed on the Plugins Page. -->
+    <vendor url="https://www.billhu.us">billhu.us</vendor>
+
+    <!-- Description of the plugin displayed on the Plugin Page and IDE Plugin Manager.
+         Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-description -->
+    <description><![CDATA[
+    Displays your real-time salary earned so far today.
+  ]]></description>
+
+    <!-- Product and plugin compatibility requirements.
+         Read more: https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html -->
+    <depends>com.intellij.modules.platform</depends>
+
+    <!-- Extension points defined by the plugin.
+         Read more: https://plugins.jetbrains.com/docs/intellij/plugin-extension-points.html -->
+    <extensions defaultExtensionNs="com.intellij">
+        <statusBarWidgetFactory
+            implementation="us.billhu.salaryplugin.SalaryWidgetFactory"
+            id="us.billhu.salaryplugin.SalaryWidgetFactory"
+        />
+        <applicationConfigurable
+            parentId="tools"
+            instance="us.billhu.salaryplugin.SalaryConfigurable"
+            id="us.billhu.salaryplugin.SalaryConfigurable"
+            displayName="Salary Settings"
+        />
+        <applicationService
+            serviceImplementation="us.billhu.salaryplugin.SalarySettings"
+        />
+    </extensions>
+</idea-plugin>
